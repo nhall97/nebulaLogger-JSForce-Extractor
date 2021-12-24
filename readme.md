@@ -19,7 +19,7 @@ SF_SECURITY_TOKEN=
 |-|-|-|
 |NebulaLogger| Package for better Salesforce Logging|https://github.com/jongpie/NebulaLogger|
 |JSForce|Javascript package for Salesforce|https://jsforce.github.io|
-|Nebula Logger nodeJS| NodeJS package to help integrate with Nebula Logger Salesforce Package |
+|Nebula Logger nodeJS| NodeJS package to help integrate with Nebula Logger Salesforce Package | https://www.npmjs.com/package/nebula-logger-nodejs|
 
 ## Example 'Records' response from Salesforce
 ```
