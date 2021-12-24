@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   res.send('Salesforce Routing!');
 });
 
-// Login to Salesforce via this endpoint //
+// Login to Salesforce
 router.get('/login', function(req, res, next) {  
   var username = process.env.SF_USERNAME;
   var password = process.env.SF_PASSWORD;
@@ -21,11 +21,8 @@ router.get('/login', function(req, res, next) {
 
   conn.login(username, password + security_token, function(err, userInfo) {
     if (err) { return console.error(err); }
-    // Now you can get the access token and instance URL information.
-    // Save them to establish connection next time.
     console.log(conn.accessToken);
     console.log(conn.instanceUrl);
-    // logged in user property
     console.log("User ID: " + userInfo.id);
     console.log("Org ID: " + userInfo.organizationId);
 });
@@ -36,24 +33,6 @@ router.get('/login', function(req, res, next) {
 
 // Query Log Table
 router.get('/logs', function(req, res, next) {
-  //I want to check if there is a login session available, if not, refresh login
-
-  // const consumer = () => {
-  //   promise.then(
-  //     result => {
-
-  //     },
-  //     error => {
-  //       console.log("CONSUMER ERROR");
-  //     }),
-  //   promise.catch(error => {
-  //     console.log("CONSUMER CATCH");
-  //     console.log(error);
-  //   });
-  // }
-
-  var records = [];
-
     if(conn.accessToken == null){
       console.log('No access token available! Need to refresh');
 
@@ -62,7 +41,7 @@ router.get('/logs', function(req, res, next) {
       refreshPromise.then(
         (result) => {
           console.log("Refreshed the login!");
-          queryAccount();
+          queryLogs();
           res.send('Login Refreshed & Query Completed');
         },
         (error) => {
@@ -72,22 +51,31 @@ router.get('/logs', function(req, res, next) {
         })
     } else {
       console.log("accessToken available, starting query");
-      queryAccount();
+      queryLogs();
       res.status('Query Completed');
     };
-    
-
 });
 
-function queryAccount() {
-  conn.query("SELECT Id, Name FROM Account", function(err, result) {
-    if (err) { 
-      return console.error(err);
-    }
+//TODO Query Related Logs
+
+function queryLogs() {
+  var records = [];
+  conn.query("SELECT Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, Issue__c, LoginBrowser__c, LoginDomain__c, LoginApplication__c FROM Log__c", function(err, result) {
+    if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
-    return ("total : " + result.totalSize);
-    })
+    console.log("done? : " + result.done);
+    if (!result.done) {
+      // you can use the locator to fetch next records set.
+      // Connection#queryMore()
+      console.log("next records URL : " + result.nextRecordsUrl);
+    }
+
+    result.records.forEach(record => {
+      console.log(record.CreatedDate + ' | ' + record.Name);
+    });
+
+  });
 }
 
 function refreshLoginPromise() {
