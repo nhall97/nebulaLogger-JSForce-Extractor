@@ -21,7 +21,7 @@ SF_SECURITY_TOKEN=
 |JSForce|Javascript package for Salesforce|https://jsforce.github.io|
 
 
-### Example 'Records' response from Salesforce
+## Example 'Records' response from Salesforce
 ```
   records: [
     {

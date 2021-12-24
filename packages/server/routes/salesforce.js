@@ -57,7 +57,6 @@ router.get('/logs', function(req, res, next) {
 });
 
 //TODO Query Related Logs
-
 function queryLogs() {
   var records = [];
   conn.query("SELECT Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, Issue__c, LoginBrowser__c, LoginDomain__c, LoginApplication__c FROM Log__c", function(err, result) {
