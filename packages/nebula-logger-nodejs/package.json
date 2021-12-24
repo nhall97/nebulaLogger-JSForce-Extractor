@@ -1,0 +1,19 @@
+{
+  "name": "nebula-logger-nodejs",
+  "version": "0.0.4",
+  "description": "Nodejs package for quering Salesforce Package \"Nebula Logger\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhall97/nebulaLogger-nodejs-ETL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhall97/nebulaLogger-nodejs-ETL/issues"
+  },
+  "homepage": "https://github.com/nhall97/nebulaLogger-nodejs-ETL#readme"
+}
