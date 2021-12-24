@@ -31,6 +31,13 @@ router.get('/login', function(req, res, next) {
   res.send('Salesforce: Login');
 });
 
+router.get('/logout', function(req, res, next) {
+  conn.accessToken = null;
+  conn.refreshToken = null;
+  console.log('Logout succesful')
+  res.send('Logout Successful!')
+});
+
 // Query Log Table
 router.get('/logs', function(req, res, next) {
     if(conn.accessToken == null){
