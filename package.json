@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/nhall97/nebulaLogger-nodejs-ETL#readme",
   "workspaces": [
-    "packages/server"
+    "packages/server",
+    "packages/nebula-logger-nodejs"
   ]
 }
