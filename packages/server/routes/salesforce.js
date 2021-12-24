@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jsforce = require('jsforce');
 require("dotenv").config();
+var nebula = require('nebula-logger-nodejs');
 
 var conn = new jsforce.Connection({
   loginUrl: process.env.SF_LOGIN_URL
@@ -66,7 +67,8 @@ router.get('/logs', function(req, res, next) {
 //TODO Query Related Logs
 function queryLogs() {
   var records = [];
-  conn.query("SELECT Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, Issue__c, LoginBrowser__c, LoginDomain__c, LoginApplication__c FROM Log__c", function(err, result) {
+
+  conn.query(nebula.log(), function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
