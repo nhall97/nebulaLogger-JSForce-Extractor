@@ -1,17 +1,16 @@
+require("dotenv").config();
 var express = require('express');
 var router = express.Router();
 var jsforce = require('jsforce');
-require("dotenv").config();
 var nebula = require('nebula-logger-nodejs');
 
 var conn = new jsforce.Connection({
   loginUrl: process.env.SF_LOGIN_URL
 });
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-  console.log('Salesforce Routing!')
-  res.send('Salesforce Routing!');
+  console.log('Salesforce Routing Module!')
+  res.send('Salesforce Routing Module!');
 });
 
 // Login to Salesforce
@@ -58,16 +57,13 @@ router.get('/logs', function(req, res, next) {
           return next(error);
         })
     } else {
-      console.log("accessToken available, starting query");
+      console.log("already logged in (accessToken available), ready to do operation");
       queryLogs();
       res.status('Query Completed');
     };
 });
 
-//TODO Query Related Logs
 function queryLogs() {
-  var records = [];
-
   conn.query(nebula.log(), function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
