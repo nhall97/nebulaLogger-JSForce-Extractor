@@ -1,14 +1,15 @@
-exports.printMsg = function() {
-    console.log("This is a message from the demo package");
-  }
+// Test function
+function helloWorld() {
+    console.log("Hello World, this is your nebula-logger-nodejs package.");
+}
 
-// exports.log__c = function() {
-//     return 'SELECT Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, Issue__c, LoginBrowser__c, LoginDomain__c, LoginApplication__c FROM Log__c';
-// }
-
+//sReturn a string with all the querable fields on the Log__c object
 const log = () => {
     return 'SELECT Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, Issue__c, LoginBrowser__c, LoginDomain__c, LoginApplication__c FROM Log__c';
-  };
-
-  exports.log = log;
+};
   
+
+module.exports = {
+  helloWorld,
+  log,
+}
