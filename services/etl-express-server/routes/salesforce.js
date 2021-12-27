@@ -10,7 +10,8 @@ var conn = new jsforce.Connection({
 
 router.get('/', function(req, res, next) {
   console.log('Salesforce Routing Module!')
-  res.send('Salesforce Routing Module!');
+  res.send('Salesforce Routing Module!' + nebula.helloWorld());
+
 });
 
 // Login to Salesforce
