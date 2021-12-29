@@ -31,9 +31,23 @@ Added a new trigger on tag
 2/ add a tag of the new version
 
 Format:   
-`git tag nebula-logger-nodejs-{Major.Minor.Patch}`
+`git tag nebula-logger-nodejs-v{Major.Minor.Patch}`
 
 Example:   
-`git tag nebula-logger-nodejs-0.0.8` 
+`git tag nebula-logger-nodejs-v0.0.8` 
 
 will trigger add a tag, which will trigger a release build on GCP.
+
+
+```bash
+$npm version patch  #patch package version
+v0.0.9
+
+$git tag nebula-logger-nodejs-v0.0.9  #add git tag
+
+$git push origin nebula-logger-nodejs-v.0.0.8  #push git tag
+
+Total 0 (delta 0), reused 0 (delta 0)
+To github.com:nhall97/nebulaLogger-nodejs-ETL.git
+ * [new tag]         nebula-logger-nodejs-v0.0.9 -> nebula-logger-nodejs-v0.0.9
+```

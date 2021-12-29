@@ -1,6 +1,6 @@
 {
   "name": "nebula-logger-nodejs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Nodejs package for quering Salesforce Package \"Nebula Logger\"",
   "main": "index.js",
   "scripts": {
