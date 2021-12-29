@@ -83,6 +83,50 @@ function queryLogs() {
   });
 }
 
+router.get('/logEntry', function(req, res, next) {
+  if(conn.accessToken == null){
+    console.log('No access token available! Need to refresh');
+
+    refreshPromise = refreshLoginPromise();
+
+    refreshPromise.then(
+      (result) => {
+        console.log("Refreshed the login!");
+        queryLogEntry();
+        res.send('Login Refreshed & Query Completed');
+      },
+      (error) => {
+        console.error("Failed to refresh the login!");
+        console.error(error.stack);
+        return next(error);
+      })
+  } else {
+    console.log("already logged in (accessToken available), ready to do operation");
+    queryLogEntry();
+    res.status('Query Completed');
+  };
+});
+
+function queryLogEntry() {
+  conn.query(nebula.logEntry(), function(err, result) {
+    if (err) { return console.error(err); }
+    console.log('-- logEntry__c --')
+    console.log("total : " + result.totalSize);
+    console.log("fetched : " + result.records.length);
+    console.log("done? : " + result.done);
+    if (!result.done) {
+      // you can use the locator to fetch next records set.
+      // Connection#queryMore()
+      console.log("next records URL : " + result.nextRecordsUrl);
+    }
+
+    result.records.forEach(record => {
+      console.log(record.CreatedDate + ' | ' + record.Name);
+    });
+
+  });
+}
+
 function refreshLoginPromise() {
   var username = process.env.SF_USERNAME;
   var password = process.env.SF_PASSWORD;
