@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var salesforceRouter = require('./routes/salesforce');
+var nebulaRouter = require('./routes/nebula');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/salesforce', salesforceRouter);
+app.use('/nebula', nebulaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
